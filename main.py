@@ -76,12 +76,5 @@ class Board:
             res = res.replace('■', 'O')
         return res
 
-b = Board()
-print(b)
-#   | 1 | 2 | 3 | 4 | 5 | 6 |
-# 1 | O | O | O | O | O | O |
-# 2 | O | O | O | O | O | O |
-# 3 | O | O | O | O | O | O |
-# 4 | O | O | O | O | O | O |
-# 5 | O | O | O | O | O | O |
-# 6 | O | O | O | O | O | O |
+    def out(self, p): # метод для проверки находится ли точка за пределами игрового поля
+        return not ((0 <= p.x < self.size) and (0 <= p.y < self.size)) # инлайновое отрицание условия нахождения точки в пределах поля (от 0 до size)
