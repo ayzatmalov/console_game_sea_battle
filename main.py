@@ -8,7 +8,7 @@ class Point: # класс будет хранить в себе информац
         return self.x == other.x and self.y == other.y
 
     def __repr__(self):
-        return f'Dot({self.x}, {self.y}'
+        return f'Point({self.x}, {self.y})'
 
 # Классы для "отлова" исключений
 class BoardException(Exception): # создаем дочерний класс от встроенного (со встроенными модулями) отлова общих исключений
@@ -25,3 +25,29 @@ class BoardUsedException(BoardException): # дочер. класс для отл
     def __str__(self):
         return "Вы уже стреляли в эту клетку!"
 
+class Ship:
+    def __init__(self, ship_head, l, o): # первая точка (нос) корабля, l и o - длина и ориентация корабля на поле
+        self.ship_head = ship_head
+        self.l = l
+        self.o = o
+        self.lives = l
+
+    @property # для создания виртуального "поля" класса Ship
+    def points(self): # метод который будет хранить все точки корабля
+        ship_points = [] # пустой список для хранения точек корабля
+        for i in range(self.l):
+            cur_x = self.ship_head.x
+            cur_y = self.ship_head.y
+
+            if self.o == 0:
+                cur_x += i
+
+            elif self.o == 1:
+                cur_y += i
+
+            ship_points.append(Point(cur_x, cur_y))
+
+        return  ship_points
+
+s = Ship(Point(1, 3), 4, 1) # проверка создания крейсера по вертикали
+print(s.points) # [[Point(1, 3), Point(1, 4), Point(1, 5), Point(1, 6)]
