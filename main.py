@@ -179,7 +179,7 @@ class Game:
             while True: # бесконечный цикл расстановки кораблей на поле
                 attempts += 1
                 if attempts > 2000: # лимит попыток, если условие верно, то...
-                    return None # возвращаем пустое игровое поле
+                    return None # возвращаем None
                 ship = Ship(Point(randint(0, self.size), randint(0, self.size)), l, randint(0, 1))
                 try:
                     board.add_ship(ship) # если корабль успешно расположен на поле, то...
@@ -189,13 +189,19 @@ class Game:
         board.begin() # после того как мы разместили на доске все корабли из списка lens, возвращаем поле чтобы подготовить его к игре
         return board
 
+    def random_board(self): # метод для гарантированного размещения кораблей на доске (если в методе try_board был достигнут лимит)
+        board = None
+        while board is None:
+            board = self.try_board()
+        return board
+
 g = Game()
 g.size = 6
 print(g.try_board())
 #   | 1 | 2 | 3 | 4 | 5 | 6 |
-# 1 | ■ | O | O | O | O | O |
-# 2 | O | O | ■ | ■ | ■ | O |
-# 3 | ■ | O | O | O | O | O |
-# 4 | ■ | O | ■ | O | O | O |
-# 5 | O | O | O | O | O | ■ |
-# 6 | ■ | O | ■ | ■ | O | O |
+# 1 | ■ | O | O | ■ | ■ | O |
+# 2 | O | O | O | O | O | O |
+# 3 | ■ | O | ■ | O | ■ | O |
+# 4 | ■ | O | O | O | O | O |
+# 5 | O | O | ■ | ■ | ■ | O |
+# 6 | ■ | O | O | O | O | O |
