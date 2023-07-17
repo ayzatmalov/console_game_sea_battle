@@ -10,3 +10,18 @@ class Point: # класс будет хранить в себе информац
     def __repr__(self):
         return f'Dot({self.x}, {self.y}'
 
+# Классы для "отлова" исключений
+class BoardException(Exception): # создаем дочерний класс от встроенного (со встроенными модулями) отлова общих исключений
+    pass
+
+class BoardWrongShipException(BoardException): # для отлова исключений при размещении кораблей на поле
+    pass
+
+class BoardOutException(BoardException): # дочерний класс для отлова пользовательского исключения
+    def __str__(self):
+        return "Вы пытаетесь выстрелить за пределы поля!"
+
+class BoardUsedException(BoardException): # дочер. класс для отлова пользоват. исключения
+    def __str__(self):
+        return "Вы уже стреляли в эту клетку!"
+
