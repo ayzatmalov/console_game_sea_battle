@@ -52,7 +52,36 @@ class Ship:
     def shoot(self, fire):
         return fire in self.points
 
-s = Ship(Point(1, 3), 4, 1) # проверка создания крейсера по вертикали
-print(s.points) # [[Point(1, 3), Point(1, 4), Point(1, 5), Point(1, 6)]
-print(s.shoot(Point(1, 4))) # True
-print(s.shoot(Point(2, 4))) # False
+# s = Ship(Point(1, 3), 4, 1) # проверка создания крейсера по вертикали
+# print(s.points) # [[Point(1, 3), Point(1, 4), Point(1, 5), Point(1, 6)]
+# print(s.shoot(Point(1, 4))) # True
+# print(s.shoot(Point(2, 4))) # False
+
+# создание игрового поля 6 х 6
+class Board:
+    def __init__(self, hid = False, size = 6):
+        self.size = size # значение размера (по умолчанию = 6)
+        self.hid = hid # скрывать поле (по умолчанию - нет)
+        self.count = 0 # счетчик для потопленных кораблей
+        self.field = [ ['O'] * size for _ in range(size) ] # визуализация клеток и состояния поля (по умолчанию в каждой клетке "0" - т.е. клетка пока пустая)
+        self.busy = [] # атрибут busy, в котором будем хранить "занятые" точки (там где есть вирт корабль, и там куда уже стреляли)
+        self.ships = [] # атрибут для списка кораблей пользователя (которые будут добавляться с помощью метода add_ship)
+
+    def __str__(self): # "отрисовка" корабля на поле
+        res = ''
+        res +=  '  | 1 | 2 | 3 | 4 | 5 | 6 |'
+        for i, row in enumerate(self.field): # цикл прохода по строчкам игрового поля (где берем индекс строчки при помощи встроенной фукнции enumerate)
+            res += f'\n{i + 1} | ' + ' | '.join(row) + ' |' # вывод номера строчки и клетки данной строчки
+        if self.hid: # изменение параметра hid, если он true
+            res = res.replace('■', 'O')
+        return res
+
+b = Board()
+print(b)
+#   | 1 | 2 | 3 | 4 | 5 | 6 |
+# 1 | O | O | O | O | O | O |
+# 2 | O | O | O | O | O | O |
+# 3 | O | O | O | O | O | O |
+# 4 | O | O | O | O | O | O |
+# 5 | O | O | O | O | O | O |
+# 6 | O | O | O | O | O | O |
