@@ -49,5 +49,10 @@ class Ship:
 
         return  ship_points
 
+    def shoot(self, fire):
+        return fire in self.points
+
 s = Ship(Point(1, 3), 4, 1) # проверка создания крейсера по вертикали
 print(s.points) # [[Point(1, 3), Point(1, 4), Point(1, 5), Point(1, 6)]
+print(s.shoot(Point(1, 4))) # True
+print(s.shoot(Point(2, 4))) # False
